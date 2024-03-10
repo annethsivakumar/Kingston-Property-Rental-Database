@@ -1,5 +1,5 @@
 # Property-Rental-Database
-In cooperation with the City of Kingston, this assignment you will draw an entity-relationship diagram to keep track of rental properties, owners and students interested in renting properties.
+In cooperation with the City of Kingston, I will keep track of rental properties, owners and students interested in renting properties.
 Your database will store information as outlined below:
 
 -   Rental properties are classified as "house", "apartment" or "room".  All rental properties have an address (street, city, province and postal code and apartment number (if applicable)), 
