@@ -1,0 +1,213 @@
+drop database if exists rentalDB;
+create database rentalDB;
+use rentalDB;
+
+
+create table PropertyManager(
+  ID char(5) not null primary key,
+  first_name varchar(30),
+  last_name varchar(30),
+  phone_number char(10) not null unique);
+
+create table RentalProperty(
+  property_ID int not null primary key,
+  apt_number int(10),
+  street varchar(70) not null,
+  city char(8) not null,
+  province char(2) not null,
+  postal_code char(7) not null,
+  accessibility enum("yes", "no"),
+  laundry enum("ensuite", "shared"),
+  cost_per_month decimal(7,2),
+  parking enum("yes", "no"),
+  date_listed date,
+  num_bath int,
+  num_bed int,
+  manager_ID char(5),
+  manager_start_year int(4),
+  foreign key (manager_ID) references PropertyManager(ID));
+
+create table House(
+  house_ID int not null primary key,
+  fenced_yard enum("yes", "no"),
+  detached_semi enum("detached", "semi"),
+  foreign key (house_id) references RentalProperty(property_id) on delete cascade);
+
+create table Apartment(
+  apartment_ID int not null primary key,
+  floor int,
+  elevator enum("yes", "no"),
+  foreign key (apartment_id) references RentalProperty(property_id) on delete cascade);
+
+create table Room(
+  room_ID int not null primary key,
+  roommate_count int,
+  kitchen_privileges enum("yes", "no"),
+  foreign key (room_id) references RentalProperty(property_id) on delete cascade);
+
+create table RoomFurnishings(
+  room_ID int not null,
+  furnishings_list varchar(50) not null,
+  primary key (room_ID, furnishings_list),
+  foreign key (room_ID) references Room(room_ID) on delete cascade);
+
+create table Owner(
+  ID char(5) not null primary key,
+  first_name varchar(30),
+  last_name varchar(30),
+  phone_number char(10) not null unique);
+
+create table RentalGroup(
+  group_code int(4) not null primary key,
+  num_bath int,
+  num_bed int,
+  type enum("House", "Apartment", "Room"),
+  laundry enum("ensuite", "shared"),
+  parking enum("yes", "no"),
+  accessibility enum("yes", "no"),
+  cost_per_month decimal(7,2),
+  home_ID int not null,
+  lease_cost_per_month decimal(7,2),
+  lease_date_signed date,
+  lease_end_date date,
+  foreign key (home_ID) references RentalProperty(property_ID) on delete cascade);
+
+create table Renter(
+  ID char(5) not null primary key,
+  student_ID varchar(15),
+  first_name varchar(30),
+  last_name varchar(30),
+  phone_number char(10),
+  program_of_study varchar(40),
+  graduation_year int(4),
+  group_ID int(4) not null,
+  foreign key (group_ID) references RentalGroup(group_code));
+
+create table Owns(
+  owner_ID char(5) not null,
+  home_ID int not null,
+  primary key (owner_ID, home_ID),
+  foreign key (owner_ID) references Owner(ID) on delete cascade,
+  foreign key (home_ID) references RentalProperty(property_ID) on delete cascade);
+
+
+
+
+
+insert into PropertyManager values
+  ('PM505', 'James', 'Taylor', '1111111111'),
+  ('PM506', 'Dylan', 'Bongo', '2222222222'),
+  ('PM507', 'Daniel', 'Jarad', '3333333333'),
+  ('PM508', 'Jerome', 'Athena', '4444444444'),
+  ('PM509', 'Rob', 'Ford', '5555555555'),
+  ('PM600', 'Steve', 'McNeal', '6666666666'),
+  ('PM601', 'Alex', 'Van', '7777777777'),
+  ('PM602', 'Jane', 'Doe', '8888888888');
+
+insert into RentalProperty values
+  (1001, 73, 'Walter Sangster Road', 'Kingston', 'ON', 'L4A 0J5', 'yes', 'ensuite', 2300.00, 'yes', '2023-01-27', 4, 3, 'PM505', 1996),
+  (1002, 59, 'King Street East', 'Kingston', 'ON', 'L0G 1M0', 'yes', 'shared', 1200.00, 'no', '2023-03-24', 3, 2, 'PM506', 1997),
+  (1003, 15325, 'Bur Oak Avenue', 'Kingston', 'ON', 'A1D 1D7', 'no', 'ensuite', 1750.75, 'yes', '2023-05-21', 3, 3, 'PM507', 1998),
+  (1004, 1, 'Queen Street', 'Kingston', 'ON', 'G4N 1M3', 'yes', 'ensuite', 1000.50, 'no', '2023-07-18', 3, 2, 'PM508', 1999),
+  (1005, 12, 'Front Street', 'Kingston', 'ON', 'M2F 3P3', 'no', 'shared', 750.00, 'no', '2023-09-15', 1, 1, 'PM509', 2000),
+  (1006, 167, 'Kennedy Road', 'Kingston', 'BC', 'P4G 6J7', 'no', 'ensuite', 5000.00, 'yes', '2023-10-12', 5, 5, 'PM600', 2001),
+  (1007, 89, 'Leslie Street', 'Kingston', 'QC', 'Z0P 8I0', 'no', 'shared', 10000.00, 'yes', '2023-11-9', 7, 7, 'PM601', 2002),
+  (1008, 33, 'Yonge Street', 'Kingston', 'PE', 'M0P 2F4', 'yes', 'ensuite', 2500.00, 'yes', '2023-12-6', 4, 4, 'PM602', 2003),
+  (2001, 1, 'Davis Drive', 'Kingston', 'ON', 'A1I 9Q0', 'yes', 'ensuite', 1000.00, 'yes', '2023-01-14', 1, 1, 'PM505', 2004),
+  (2002, 10, 'Huron Heights Drive', 'Kingston', 'ON', 'B2J 1R2', 'yes', 'shared', 1100.00, 'yes', '2023-02-13', 1, 2, 'PM506', 2005),
+  (2003, 200, 'Bayview Avenue', 'Kingston', 'BC', 'C3K 3S4', 'no', 'ensuite', 1300.00, 'yes', '2023-03-12', 2, 1, 'PM507', 2006),
+  (2004, 3000, 'Shannan Road', 'Kingston', 'PE', 'D4L 5T6', 'no', 'ensuite', 1400.00, 'no', '2023-04-11', 4, 2, 'PM508', 2007),
+  (2005, 40000,'Hoover Park Way', 'Kingston', 'ON', 'E5M 7U8', 'no', 'shared', 1750.00, 'yes', '2023-05-10', 2, 3, 'PM509', 2008),
+  (2006, 5000, 'Woodbine Avenue', 'Kingston', 'NU', 'F6N 9V0', 'yes', 'shared', 1090.50, 'yes', '2023-06-09', 3, 2, 'PM600', 2009),
+  (2007, 600, 'Brock Road', 'Kingston', 'ON', 'G7O 1W2', 'yes', 'ensuite', 2000.00, 'yes', '2023-07-08', 4, 3, 'PM601', 2010),
+  (2008, 50, 'Finch Avenue', 'Kingston', 'MB', 'H8P 3X4', 'no', 'ensuite', 3000.00, 'no', '2023-08-07', 4, 3, 'PM602', 2011),
+  (3001, 2, 'Princess Street', 'Kingston', 'ON', 'A9B 8C7', 'no', 'ensuite', 700.00, 'yes', '2024-01-04', 1, 1, 'PM505', 2012),
+  (3002, 21, 'Vivian Creek Road', 'Kingston', 'BC', 'D6E 5F4', 'no', 'shared', 750.00, 'yes', '2024-01-08', 1, 2, 'PM506', 2013),
+  (3003, 201, 'Harold Road', 'Kingston', 'ON', 'G3H 2I1', 'yes', 'ensuite', 800.00, 'yes', '2024-01-12', 2, 1, 'PM507', 2014),
+  (3004, 2001, 'Aurora Road', 'Kingston', 'ON', 'J0K 9L8', 'yes', 'shared', 850.00, 'yes', '2024-01-16', 2, 2, 'PM508', 2015),
+  (3005, 21, 'Hoover Park Drive', 'Kingston', 'ON', 'M7N 6O5', 'yes', 'ensuite', 900.00, 'yes', '2024-01-20', 2, 3, 'PM509', 2016),
+  (3006, 3, 'Tenth Line', 'Kingston', 'PE', 'P4Q 3R2', 'no', 'ensuite', 950.00, 'yes', '2024-01-24', 3, 2, 'PM600', 2017),
+  (3007, 3000, 'Elm Street', 'Kingston', 'ON', 'S1T 0U9', 'no', 'shared', 1000.00, 'no', '2024-01-28', 3, 3, 'PM601', 2018),
+  (3008, 300, 'Stuart Street', 'Kingston', 'QC', 'V8W 7X6', 'no', 'ensuite', 1200.00, 'no', '2024-01-31', 3, 4, 'PM602', 2019);
+
+insert into House values
+  (1001, 'yes', 'detached'),
+  (1002, 'no', 'semi'),
+  (1003, 'yes', 'semi'),
+  (1004, 'no', 'semi'),
+  (1005, 'no', 'semi'),
+  (1006, 'yes', 'detached'),
+  (1007, 'yes', 'detached'),
+  (1008, 'yes', 'semi');
+
+insert into Apartment values
+  (2001, 1, 'no'),
+  (2002, 2, 'no'),
+  (2003, 3, 'yes'),
+  (2004, 5, 'yes'),
+  (2005, 7, 'yes'),
+  (2006, 9, 'yes'),
+  (2007, 10, 'yes'),
+  (2008, 12, 'yes');
+
+insert into Room values
+  (3001, 2, 'no'),
+  (3002, 2, 'yes'),
+  (3003, 2, 'yes'),
+  (3004, 2, 'yes'),
+  (3005, 1, 'no'),
+  (3006, 2, 'yes'),
+  (3007, 0, 'yes'),
+  (3008, 0, 'yes');
+
+insert into RoomFurnishings values
+  (3001, 'desk'),
+  (3001, 'lamp'),
+  (3001, 'bed'),
+  (3003, 'stand'),
+  (3004, 'couch'),
+  (3004, 'mini fridge'),
+  (3005, 'chair'),
+  (3006, 'painting');
+
+insert into Owner values
+  ('AS101', 'Anneth', 'Sivakumar', '1234567890'),
+  ('MP102', 'Mason', 'Petri', '2468086420'),
+  ('SZ103', 'Shireef', 'Zekry', '3690963036'),
+  ('HK104', 'Haris', 'Khan', '1357903827'),
+  ('CP105', 'Connor', 'Petri', '9327074838'),
+  ('MI106', 'Matthew', 'Irwin', '0293743733'),
+  ('LE107', 'Lavan', 'Ethirnayagam', '8725343980'),
+  ('JM108', 'Jordan', 'Medulan', '7643890427');
+
+insert into RentalGroup values
+  (0001, 2, 2, 'House', 'ensuite', 'yes', null, 850.00, 1005, 750.00, '2024-02-01', '2025-02-01'),
+  (0002, 3, 3, 'House', null, 'no', 'yes', 1500.00, 1002, 1200.00, '2024-02-02', '2025-02-02'),
+  (0003, null, null, 'House', 'ensuite', 'yes', 'no', 3000.00, 1008, 2500.00, '2024-02-03', '2025-02-03'),
+  (0004, 1, 1, 'Apartment', 'shared', 'no', 'yes', 1000.00, 2001, 1000.00, '2024-02-04', '2025-02-04'),
+  (0005, 2, 2, 'Apartment', 'ensuite', 'yes', 'no', 2000.00, 2007, 2000.00, '2024-02-05', '2025-02-05'),
+  (0006, null, 2, 'Room', 'ensuite', 'no', 'yes', 700.00, 3003, 750.00, '2024-02-06', '2025-02-06'),
+  (0007, null, null, 'Room', 'shared', 'yes', 'no', 800.00, 3003, 850.00, '2024-02-07', '2025-02-07'),
+  (0008, null, null, 'Room', 'ensuite', 'no', 'yes', 900.00, 3003, 90000.00, '2024-02-08', '2025-02-08');
+
+insert into Renter values 
+  ('ZZ001', '26AS01', 'Barry', 'Allen', '8906782345', 'Computer Science', 2026, 0001),
+  ('ZZ002', '25AS221', 'Amir', 'Khan', '8906782345', 'Biology ', 2025, 0002),
+  ('ZZ003', '27AS341', 'Leo', 'Messi', '8906782345', 'Psychology', 2027, 0002),
+  ('ZZ004', '26AS667', 'Niko', 'Green', '8906782345', 'Religious Studies', 2026, 0002),
+  ('ZZ005', '27AS89', 'Ashleigh', 'Graham', '8906782345', 'Life Science', 2027, 0003),
+  ('ZZ006', '27AS343', 'Lily', 'McLevin', '8906782345', 'Health Science', 2027, 0003),
+  ('ZZ007', '25AS4564', 'Archie', 'Jamel', '8906782345', 'Geology ', 2025, 0004),
+  ('ZZ008', '28AS21', 'Sophia', 'Chess', '8906782345', 'Geography', 2028, 0005);
+
+insert into Owns values
+  ('AS101', 1001),
+  ('MP102', 2002),
+  ('SZ103', 3003),
+  ('HK104', 3004),
+  ('CP105', 2005),
+  ('MI106', 1006),
+  ('LE107', 2007),
+  ('AS101', 1008);
+
+
