@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="createDesign.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+    <img src="backgroundweb.jpg" class="background"/>
+    <img src="kingstonLogo.png" class="kingstonLogo"/>
+  </div>
+
+  <div class="dropdown">
+    <a href="http://localhost/rental.php">
+        <button class="dropbtn">DASHBOARD</button>
+    </a>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn">CREATE     <i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content">
+            <a href="http://localhost/createHouse.html">CREATE: House Rental Property - Owner - Property Manager</a>
+            <a href="http://localhost/createApartment.html">CREATE: Apartment Rental Property - Owner - Property Manager</a>
+            <a href="http://localhost/createRoom.html">CREATE: Room Rental Property - Owner - Property Manager</a>
+            <a href="http://localhost/createRenters.html">CREATE: Renter - Rental Group</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">READ     <i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content">
+          <a href="http://localhost/readOwnerManager.php">READ: Property ID - Owner Name - Property Manager Name</a>
+          <a href="http://localhost/readRentalPropertiesGroups.php">READ: Rental Properties - Rental Groups</a>
+          <a href="http://localhost/readPropertyManager.php">READ: Propety Managers</a>
+          <a href="http://localhost/readRentalGroup.php">READ: Rental Group</a>
+          <a href="http://localhost/readRenters.php">READ: Renters</a>
+          <a href="http://localhost/readFurnishingsList.php">READ: Furnishings List</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">UPDATE     <i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content">
+        <a href="http://localhost/updateOwner.html">UPDATE: Owner</a>
+        <a href="http://localhost/updatePropertyManager.html">UPDATE: Property Manager</a>
+        <a href="http://localhost/updateRentalGroup.html">UPDATE: Rental Group</a>
+        <a href="http://localhost/updateRenter.html">UPDATE: Renter</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+      <a href="http://localhost/deleteItem.html">
+        <button class="dropbtn">DELETE </button>
+      </a>
+    </div>
+
+  <div class="white-box">
+    <h1>Create Rental Group Prefences & Lease: </h1>
+    <form action="createRenters.php" method="post"> 
+        <p>Group ID: <input type="text" name="group_code" placeholder="4-DIGIT MAX"><br></p>
+        <p>Rental Property Type: <select id="type" name="type">
+            <option value=null>---</option>
+            <option value="House">House</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Room">Room</option>
+        </select><br></p>
+        <p>Cost per Month: <input type="text" name="cost_per_month"><br></p>
+        <p>Number of Bedroom: <input type="text" name="num_bed"><br></p>
+        <p>Number of Bathroom: <input type="text" name="num_bath"><br></p>
+        <p>Parking: <select id="parking" name="parking">
+            <option value=null>---</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br></p>
+        <p>Laundry: <select id="laundry" name="laundry">
+            <option value=null>---</option>
+            <option value="ensuite">Ensuite</option>
+            <option value="shared">Shared</option>
+        </select><br></p>
+        <p>Accesible: <select id="accessibility" name="accessibility">
+            <option value=null>---</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br></p>
+        <p>Property ID: <input type="text" name="home_ID"><br></p>
+        <p>Cost per Month: <input type="text" name="lease_cost_per_month"><br></p>
+        <p>Date Lease Signed (YYYY-MM-DD): <input type="text" name="lease_date_signed" placeholder="YYYY-MM-DD"><br></p>
+        <p>Date Lease Ends (YYYY-MM-DD): <input type="text" name="lease_end_date" placeholder="YYYY-MM-DD"><br></p>
+
+        <hr class="black-line">
+
+        <h1>Create Renter: </h1>
+        <p>Group ID: <input type="text" name="group_code2"><br></p>
+        <p>Renter ID: <input type="text" name="ID" placeholder="Ex. CR123"><br></p>
+        <p>Student ID Included: <input type="text" name="student_ID"><br></p>
+        <p>First Name: <input type="text" name="first_name"><br></p>
+        <p>Last Name: <input type="text" name="last_name"><br></p>
+        <p>Phone Number: <input type="text" name="phone_number" placeholder="Ex. 1234567890"><br></p>
+        <p>Program of Study: <input type="text" name="program_of_study" placeholder="Ex. Biology, Life Science..."><br></p>
+        <p>Graduation Year: <input type="text" name="graduation_year" placeholder="YYYY"><br></p>
+        
+        <input type="submit">
+        <br>
+    </form>
+  </div>
+
+</body>
+</html>

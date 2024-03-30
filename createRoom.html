@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="createDesign.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+    <img src="backgroundweb.jpg" class="background"/>
+    <img src="kingstonLogo.png" class="kingstonLogo"/>
+  </div>
+
+  <div class="dropdown">
+    <a href="http://localhost/rental.php">
+        <button class="dropbtn">DASHBOARD</button>
+    </a>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn">CREATE     <i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-content">
+    <a href="http://localhost/createHouse.html">CREATE: House Rental Property - Owner - Property Manager</a>
+    <a href="http://localhost/createApartment.html">CREATE: Apartment Rental Property - Owner - Property Manager</a>
+    <a href="http://localhost/createRoom.html">CREATE: Room Rental Property - Owner - Property Manager</a>
+    <a href="http://localhost/createRenters.html">CREATE: Renter - Rental Group</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+      <button class="dropbtn">READ     <i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="http://localhost/readOwnerManager.php">READ: Property ID - Owner Name - Property Manager Name</a>
+        <a href="http://localhost/readRentalPropertiesGroups.php">READ: Rental Properties - Rental Groups</a>
+        <a href="http://localhost/readPropertyManager.php">READ: Propety Managers</a>
+        <a href="http://localhost/readRentalGroup.php">READ: Rental Group</a>
+        <a href="http://localhost/readRenters.php">READ: Renters</a>
+        <a href="http://localhost/readFurnishingsList.php">READ: Furnishings List</a>
+      </div>
+  </div>
+
+  <div class="dropdown">
+      <button class="dropbtn">UPDATE     <i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+      <a href="http://localhost/updateOwner.html">UPDATE: Owner</a>
+      <a href="http://localhost/updatePropertyManager.html">UPDATE: Property Manager</a>
+      <a href="http://localhost/updateRentalGroup.html">UPDATE: Rental Group</a>
+      <a href="http://localhost/updateRenter.html">UPDATE: Renter</a>
+      </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="http://localhost/deleteItem.html">
+      <button class="dropbtn">DELETE </button>
+    </a>
+  </div>
+
+  <div class="white-box">
+    <h1>Create Room Rental Property: </h1>
+    <form action="createRoom.php" method="post"> 
+        <p>Property ID: <input type="text" name="property_ID"><br></p>
+        <p>Date Listed: <input type="text" name="date_listed" placeholder="YYYY-MM-DD"><br></p>
+        <p>Cost per Month: <input type="text" name="cost_per_month"><br></p>
+        <p>Apartment Number: <input type="text" name="apt_number"><br></p>
+        <p>Street: <input type="text" name="street"><br></p>
+        <p>City: <input type="text" name="city"><br></p>
+        <p>Province: <input type="text" name="province" placeholder="Ex. ON, NB, QC..."><br></p>
+        <p>Postal Code: <input type="text" name="postal_code" placeholder="Ex. L4A 0J5"><br></p>
+        <p>Number of Bedroom: <input type="text" name="num_bed"><br></p>
+        <p>Number of Bathroom: <input type="text" name="num_bath"><br></p>
+        <p>Roommate Count: <input type="text" name="roommate_count"><br></p>
+        <p>Parking: <select id="parking" name="parking">
+            <option value=null>---</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br></p>
+        <p>Laundry: <select id="laundry" name="laundry">
+            <option value=null>---</option>
+            <option value="ensuite">Ensuite</option>
+            <option value="shared">Shared</option>
+        </select><br></p>
+        <p>Accesible: <select id="accessibility" name="accessibility">
+            <option value=null>---</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br></p>
+        <p>Kitchen Privileges: <select id="kitchen_privileges" name="kitchen_privileges">
+            <option value=null>---</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br></p>
+
+        <hr class="black-line">
+
+        <h1>Insert Room Furnishings: </h1>
+        <p>Property ID: <input type="text" name="property_ID2"><br></p>
+        <p>Furnishings Included: <input type="text" name="furnishings_list"><br></p>
+
+        <hr class="black-line">
+
+        <h1>Create Owner: </h1>
+        <p>Owner ID: <input type="text" name="owner_ID" placeholder="Ex. CR123"><br></p>
+        <p>First Name: <input type="text" name="owner_first_name"><br></p>
+        <p>Last Name: <input type="text" name="owner_last_name"><br></p>
+        <p>Phone Number: <input type="text" name="owner_phone_number" placeholder="Ex. 1234567890"><br><br></p>
+
+        <hr class="black-line">
+
+        <h1>Create Property Manager: </h1>
+        <p>Property Manager ID: <input type="text" name="manager_ID" placeholder="Ex. CR123"><br></p>
+        <p>First Name: <input type="text" name="manager_first_name"><br></p>
+        <p>Last Name: <input type="text" name="manager_last_name"><br></p>
+        <p>Phone Number: <input type="text" name="manager_phone_number" placeholder="Ex. 1234567890"><br></p>
+        <p>Manager Start Year (YYYY): <input type="text" name="manager_start_year" placeholder="YYYY"><br></p>
+        
+        <input type="submit">
+        <br>
+    </form>
+  </div>
+
+</body>
+</html>

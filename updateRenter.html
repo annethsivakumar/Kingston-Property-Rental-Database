@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="createDesign.css">
+
+</head>
+
+<body>
+
+  <div class="container">
+    <img src="backgroundweb.jpg" class="background"/>
+    <img src="kingstonLogo.png" class="kingstonLogo"/>
+  </div>
+
+  <div class="dropdown">
+    <a href="http://localhost/rental.php">
+      <button class="dropbtn">DASHBOARD</button>
+    </a>
+  </div>
+
+  <div class="dropdown">
+    <button class="dropbtn">CREATE     <i class="fa fa-caret-down"></i></button>
+    <div class="dropdown-content">
+    <a href="http://localhost/createHouse.html">CREATE: House Rental Property - Owner - Property Manager</a>
+    <a href="http://localhost/createApartment.html">CREATE: Apartment Rental Property - Owner - Property Manager</a>
+    <a href="http://localhost/createRoom.html">CREATE: Room Rental Property - Owner - Property Manager</a>
+    <a href="http://localhost/createRenters.html">CREATE: Renter - Rental Group</a>
+    </div>
+  </div>
+
+  <div class="dropdown">
+      <button class="dropbtn">READ     <i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="http://localhost/readOwnerManager.php">READ: Property ID - Owner Name - Property Manager Name</a>
+        <a href="http://localhost/readRentalPropertiesGroups.php">READ: Rental Properties - Rental Groups</a>
+        <a href="http://localhost/readPropertyManager.php">READ: Propety Managers</a>
+        <a href="http://localhost/readRentalGroup.php">READ: Rental Group</a>
+        <a href="http://localhost/readRenters.php">READ: Renters</a>
+        <a href="http://localhost/readFurnishingsList.php">READ: Furnishings List</a>
+      </div>
+  </div>
+
+  <div class="dropdown">
+      <button class="dropbtn">UPDATE     <i class="fa fa-caret-down"></i></button>
+      <div class="dropdown-content">
+      <a href="http://localhost/updateOwner.html">UPDATE: Owner</a>
+      <a href="http://localhost/updatePropertyManager.html">UPDATE: Property Manager</a>
+      <a href="http://localhost/updateRentalGroup.html">UPDATE: Rental Group</a>
+      <a href="http://localhost/updateRenter.html">UPDATE: Renter</a>
+      </div>
+  </div>
+
+  <div class="dropdown">
+    <a href="http://localhost/deleteItem.html">
+      <button class="dropbtn">DELETE </button>
+    </a>
+  </div>
+
+  <div class="white-box">
+    <h1>Update Renter: </h1>
+    <p>*** RENTER ID IS REQUIRED! ***</p>
+    <form action="updateRenter.php" method="post"> 
+        <p>Renter ID: <input type="text" name="renter_ID" placeholder="Ex. CR123"><br></p>
+        <p>Student ID Included: <input type="text" name="renter_student_ID"><br></p>
+        <p>First Name: <input type="text" name="renter_first_name"><br></p>
+        <p>Last Name: <input type="text" name="renter_last_name"><br></p>
+        <p>Phone Number: <input type="text" name="renter_phone_number" placeholder="Ex. 1234567890"><br></p>
+        <p>Program of Study: <input type="text" name="renter_program_of_study" placeholder="Ex. Biology, Life Science..."><br></p>
+        <p>Graduation Year: <input type="text" name="renter_graduation_year" placeholder="YYYY"><br></p>
+        <p>Group ID: <input type="text" name="renter_group_code"><br></p>
+        <input type="submit">
+        <br>
+    </form>
+  </div>
+</body>
+</html>
